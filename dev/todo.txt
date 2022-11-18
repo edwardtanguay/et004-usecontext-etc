@@ -1,6 +1,6 @@
 - x create PageBooks (replace PageInfo)
-- .. in useContext, fetch books from https://edwardtanguay.vercel.app/share/techBooks.json
-- on PageBooks, show the fetched books when they arrive
+- x in useContext, fetch books from https://edwardtanguay.vercel.app/share/techBooks.json
+- .. on PageBooks, show the fetched books when they arrive
 - build a mock wait of 3 seconds to show how loading graphic works
 - on the welcome page, show: Our student group has nnn books.
 	- make a waiting messagein, e.g. "Loading books..."

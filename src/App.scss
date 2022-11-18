@@ -22,4 +22,33 @@ body {
 			color: rgb(211, 211, 110);
 		}
 	}
+
+	.pageBooks {
+		.books {
+			.book {
+				display: flex;
+				gap: 1rem;
+				margin-bottom: 2rem;
+
+				img {
+					width: 8rem;
+				}
+
+				.title {
+					font-size: 1.6rem;
+					color: rgb(197, 161, 94);
+				}
+
+				.description {
+					font-style: italic;
+				}
+
+				.language {
+					color: rgb(82, 186, 82);
+					font-size: 1.2rem;
+					margin-top: .5rem;
+				}
+			}
+		}
+	}
 }

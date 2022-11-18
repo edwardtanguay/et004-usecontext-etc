@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { createContext } from 'react';
 import axios from 'axios';
+import * as tools from './tools';
 
 const booksUrl = 'https://edwardtanguay.vercel.app/share/techBooks.json';
 
@@ -37,7 +38,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 					idCode: rawBook.idCode,
 					title: rawBook.title,
 					description: rawBook.description,
-					language: rawBook.language === '' ? 'English' : 'French'
+					language: rawBook.language === '' ? 'English' : tools.capitalizeFirstLetter(rawBook.language),
 				}
 				_books.push(_book);
 			});
