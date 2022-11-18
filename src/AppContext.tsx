@@ -15,7 +15,8 @@ interface IBook {
 
 interface IAppContext {
 	appTitle: string;
-	books: IBook[]
+	books: IBook[];
+	booksAreLoading: boolean;
 }
 
 interface IAppProvider {
@@ -26,32 +27,43 @@ export const AppContext = createContext<IAppContext>({} as IAppContext);
 
 export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 	const [books, setBooks] = useState<IBook[]>([]);
-	const appTitle = "The Study Group";
+	const [booksAreLoading, setBooksAreLoading] = useState(false);
+	const appTitle = 'The Study Group';
 
 	useEffect(() => {
-		(async () => {
-			const rawBooks = (await axios.get(booksUrl)).data;
-			const _books:IBook[] = [];
-			rawBooks.forEach((rawBook: any) => {
-				const _book: IBook = {
-					id: rawBook.id,
-					idCode: rawBook.idCode,
-					title: rawBook.title,
-					description: rawBook.description,
-					language: rawBook.language === '' ? 'English' : tools.capitalizeFirstLetter(rawBook.language),
-				}
-				_books.push(_book);
-			});
-			setBooks(_books);
-		})();
+		setBooksAreLoading(true);
+		setTimeout(() => {
+			(async () => {
+				const rawBooks = (await axios.get(booksUrl)).data;
+				const _books: IBook[] = [];
+				rawBooks.forEach((rawBook: any) => {
+					const _book: IBook = {
+						id: rawBook.id,
+						idCode: rawBook.idCode,
+						title: rawBook.title,
+						description: rawBook.description,
+						language:
+							rawBook.language === ''
+								? 'English'
+								: tools.capitalizeFirstLetter(rawBook.language),
+					};
+					_books.push(_book);
+				});
+				setBooks(_books);
+				setBooksAreLoading(false);
+			})();
+		}, 3000);
 	}, []);
-	
+
 	return (
-		<AppContext.Provider value={{
-			appTitle,
-			books
-		}}>
+		<AppContext.Provider
+			value={{
+				appTitle,
+				books,
+				booksAreLoading,
+			}}
+		>
 			{children}
 		</AppContext.Provider>
-	)
-}
+	);
+};
