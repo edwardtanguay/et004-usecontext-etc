@@ -1,15 +1,15 @@
 import { useContext } from 'react';
 import { AppContext } from '../AppContext';
+import { FaSpinner } from 'react-icons/fa';
 
 export const PageBooks = () => {
 	const { books, booksAreLoading } = useContext(AppContext);
 
 	return (
 		<div className="page pageBooks">
-			<p>This is the Books page.</p>
 
 			{booksAreLoading ? (
-				<div className="loading">Loading...</div>
+				<FaSpinner className="spinner" />
 			) : (
 				<div className="books">
 					{books.map((book) => {
